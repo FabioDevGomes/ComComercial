@@ -1,0 +1,6 @@
+@CHARSET "ISO-8859-1";
+
+.panelNoBorder, .panelNoBorder tr, .panelNoBorder td{
+border: hidden;
+border-color: white;
+}

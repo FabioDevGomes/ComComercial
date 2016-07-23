@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<link rel="stylesheet" type="text/css" href="css/geral.css"></link>
+</h:head>
+<h:body>
+	<p:growl id="mensagem" showDetail="true" autoUpdate="true"
+		closable="true" />
+	<h:form id="frmCastelo">
+		<p:panelGrid columns="2" style="horizontal-align:center" styleClass="panelNoBorder">
+			<h:outputText value="nome" />
+			<p:inputText id="nome" value="#{clienteMB.cliente.nome}" />
+			<h:outputText value="Observações" />
+			<p:inputTextarea rows="6" cols="33" value="#{clienteMB.cliente.observacoes}"/>
+			<h:outputText value="Classificação" />
+			<p:rating value="#{ratingView.rating1}" />
+		</p:panelGrid>
+		<p:panelGrid columns="6" style=" border: none">
+			<h:commandButton action="#{clienteMB.incluir}" value="Incluir"
+				update="tabela" />
+		</p:panelGrid>
+	</h:form>
+	<p:dataTable id="tabela" var="item" value="#{clienteMB.listaClientes}"
+		paginator="true" rows="10" emptyMessage="Não há registros na lista"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="10,15,25,50,100">
+		<p:column headerText="Nome do Cliente" style="width: 10%;" sortBy="#{item.id}">
+			<h:outputText value="#{item.nome}" />
+		</p:column>
+		<p:column headerText="Observações" style="width: 25%;" sortBy="#{item.nome}">
+			<h:outputText value="#{item.observacoes}" />
+		</p:column>
+	</p:dataTable>
+</h:body>
+</html>
