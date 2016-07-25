@@ -38,5 +38,18 @@ protected EntityManager entityManager;
 	public List<Cliente> listarTodas() {
 		return entityManager.createQuery("FROM " + Cliente.class.getName()).getResultList();
 	}
+	
+	public void excluir(Cliente cliente) {
+		try {
+			entityManager.getTransaction().begin();
+			cliente = entityManager.find(Cliente.class, cliente.getId());
+			entityManager.remove(cliente);
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			entityManager.getTransaction().rollback();
+		}
+		
+	}
 
 }

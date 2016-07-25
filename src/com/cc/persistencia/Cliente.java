@@ -25,12 +25,27 @@ public class Cliente {
 	private Long id;
 	private String nome;
 	private String observacoes;
-	private Integer avaliação;
+	private String telefone;
+	private Integer avaliacaoo;
+	private Date dataCadastro;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="cliente_id")
 	private List<Compra> compras;
 	
+	
+	public Cliente() {
+	}
+	
+	public Cliente(Long id) {
+		super();
+		this.id = id;
+	}
+
+	public Cliente(String id) {
+		super();
+		this.id = Long.parseLong(id);
+	}
 	
 	public String getNome() {
 		return nome;
@@ -44,17 +59,29 @@ public class Cliente {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
-	public Integer getAvaliação() {
-		return avaliação;
-	}
-	public void setAvaliação(Integer avaliação) {
-		this.avaliação = avaliação;
-	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+	public Integer getAvaliacaoo() {
+		return avaliacaoo;
+	}
+	public void setAvaliacaoo(Integer avaliacaoo) {
+		this.avaliacaoo = avaliacaoo;
 	}
 	
 	

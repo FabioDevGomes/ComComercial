@@ -8,20 +8,21 @@
 <h:body>
 	<p:growl id="mensagem" showDetail="true" autoUpdate="true"
 		closable="true" />
-	<h:form id="frmCastelo">
+	<h:form id="frmCliente">
 		<p:panelGrid columns="2" style="horizontal-align:center" styleClass="panelNoBorder">
 			<h:outputText value="nome" />
 			<p:inputText id="nome" value="#{clienteMB.cliente.nome}" />
+			<h:outputText value="Telefone" />
+			<p:inputMask id="telefone" value="#{clienteMB.cliente.telefone}" mask="(99) 9999-9999?9"/>
 			<h:outputText value="Observações" />
 			<p:inputTextarea rows="6" cols="33" value="#{clienteMB.cliente.observacoes}"/>
 			<h:outputText value="Classificação" />
-			<p:rating value="#{ratingView.rating1}" />
+			<p:rating value="#{clienteMB.cliente.avaliacaoo}" />
 		</p:panelGrid>
-		<p:panelGrid columns="6" style=" border: none">
+		<p:panelGrid columns="6" styleClass="panelNoBorder">
 			<h:commandButton action="#{clienteMB.incluir}" value="Incluir"
 				update="tabela" />
 		</p:panelGrid>
-	</h:form>
 	<p:dataTable id="tabela" var="item" value="#{clienteMB.listaClientes}"
 		paginator="true" rows="10" emptyMessage="Não há registros na lista"
 		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -32,6 +33,17 @@
 		<p:column headerText="Observações" style="width: 25%;" sortBy="#{item.nome}">
 			<h:outputText value="#{item.observacoes}" />
 		</p:column>
+		<p:column headerText="Telefone" style="width: 25%;" sortBy="#{item.telefone}">
+			<h:outputText value="#{item.telefone}" />
+		</p:column>
+		<p:column headerText="Avaliação" style="width: 10%;" sortBy="#{item.avaliacaoo}">
+			<p:rating value="#{item.avaliacaoo}" />
+		</p:column>
+		<p:column headerText="" style="width: 10%;" sortBy="#{item.avaliacaoo}">
+			<h:commandButton action="#{clienteMB.excluir(item.id)}" value="Excluir"
+				update="tabela" />
+		</p:column>
 	</p:dataTable>
+	</h:form>
 </h:body>
 </html>

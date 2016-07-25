@@ -18,6 +18,10 @@ public class ClienteMB {
 	
 	public ClienteMB() {
 		clienteDao = new ClienteDao();
+		estadoInicial();
+	}
+	
+	private void estadoInicial(){
 		cliente = new Cliente();
 		listar();
 	}
@@ -30,11 +34,21 @@ public class ClienteMB {
 	public void incluir(){
 		Cliente cliente = getCliente();
 		clienteDao.incluir(cliente);
-		listar(); 
+		estadoInicial();
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"Controle de Clientes:", 
 						"Cliente incluído com sucesso!"));
+	}
+	
+	public void excluir(String id){
+		Cliente cliente = new Cliente(id);
+		clienteDao.excluir(cliente);
+		estadoInicial();
+		FacesContext.getCurrentInstance().addMessage(null, 
+				new FacesMessage(FacesMessage.SEVERITY_INFO, 
+						"Controle de Clientes:", 
+						"Cliente Excluído com sucesso!"));
 	}
 	
 	
