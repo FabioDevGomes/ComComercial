@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 
 import com.cc.persistencia.Cliente;
 
-public class ClienteDao {
+public class ClienteDao implements Dao<Cliente>{
 
 protected EntityManager entityManager;
 	
