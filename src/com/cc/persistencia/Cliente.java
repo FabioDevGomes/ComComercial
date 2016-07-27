@@ -30,7 +30,7 @@ public class Cliente {
 	private Date dataCadastro;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="cliente_id")
+	@JoinColumn(name="compra_id", referencedColumnName="cliente_id")
 	private List<Compra> compras;
 	
 	

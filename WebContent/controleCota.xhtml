@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<link rel="stylesheet" type="text/css" href="css/geral.css"></link>
+</h:head>
+<h:body>
+	<p:growl id="mensagem" showDetail="true" autoUpdate="true"
+		closable="true" />
+	<h:form id="frmCliente">
+		<p:panelGrid columns="2" style="horizontal-align:center" styleClass="panelNoBorder">
+			<h:outputText value="Mês" />
+			<p:selectOneMenu id="console" value="#{vendaPorDiaMB.mes.data}" style="width:125px">
+            <f:selectItem itemLabel="Selecione o mês" itemValue="" />
+	            <f:selectItem itemLabel="Junho" itemValue="6" />
+	            <f:selectItem itemLabel="Julho" itemValue="7" />
+	            <f:selectItem itemLabel="Agosto" itemValue="8" />
+	        </p:selectOneMenu>
+			<h:outputText value="Dia" />
+			<p:calendar id="data" value="#{vendaPorDiaMB.vendaPorDia.data}" />
+		</p:panelGrid>
+		<p:panelGrid columns="6" styleClass="panelNoBorder">
+			<h:commandButton action="#{vendaPorDiaMB.incluir}" value="Incluir"
+				update="tabela" />
+		</p:panelGrid>
+	<p:dataTable id="tabela" var="item" value="#{vendaPorDiaMB.listaVendas}"
+		paginator="true" rows="10" emptyMessage="Não há registros na lista"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="10,15,25,50,100">
+		<p:column headerText="Nome do Cliente" style="width: 10%;" sortBy="#{item.id}">
+			<h:outputText value="#{item.valorVenda}" />
+		</p:column>
+		<p:column headerText="Observações" style="width: 25%;">
+			<h:outputText value="#{item.data}" />
+		</p:column>
+		<p:column headerText="" style="width: 10%;">
+			<h:commandButton action="#{vendaPorDiaMB.excluir(item.id)}" value="Excluir"
+				update="tabela" />
+		</p:column>
+	</p:dataTable>
+	</h:form>
+</h:body>
+</html>

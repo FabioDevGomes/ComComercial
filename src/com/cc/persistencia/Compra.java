@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +19,8 @@ public class Compra {
 	private Long id;
 	private Double valor;
 	private Date dtCompra;
+	@ManyToOne
+	private Cliente cliente;
 	public Long getId() {
 		return id;
 	}
@@ -35,6 +38,12 @@ public class Compra {
 	}
 	public void setDtCompra(Date dtCompra) {
 		this.dtCompra = dtCompra;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

@@ -1,47 +1,73 @@
 package com.cc.persistencia;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Mes {
-  
-  private long id;
-  private double valorCota;
-  private int qtdDiasFolga;
-  private List<VendaPorDia> vendas;
-  
-  public long getId() {
-    return id;
-  }
-  
-  public void setId(long id) {
-    this.id = id;
-  }
-  
-  public double getValorCota() {
-    return valorCota;
-  }
-  
-  public void setValorCota(double valorCota) {
-    this.valorCota = valorCota;
-  }
-  
-  public List<VendaPorDia> getVendas() {
-    return vendas;
-  }
-  
-  public void setVendas(List<VendaPorDia> vendas) {
-    this.vendas = vendas;
-  }
 
-  public int getQtdDiasFolga() {
-    return qtdDiasFolga;
-  }
+	@Id
+	@GeneratedValue
+	@Column(name = "mes_id")
+	private long id;
+	private Integer data;
+	private double valorCota;
+	private int qtdDiasFolga;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="mes_id")
+	private List<VendaPorDia> vendas;
 
-  public void setQtdDiasFolga(int qtdDiasFolga) {
-    this.qtdDiasFolga = qtdDiasFolga;
-  }
-  
-  
-  
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public double getValorCota() {
+		return valorCota;
+	}
+
+	public void setValorCota(double valorCota) {
+		this.valorCota = valorCota;
+	}
+
+	public List<VendaPorDia> getVendas() {
+		return vendas;
+	}
+
+	public void setVendas(List<VendaPorDia> vendas) {
+		this.vendas = vendas;
+	}
+
+	public int getQtdDiasFolga() {
+		return qtdDiasFolga;
+	}
+
+	public void setQtdDiasFolga(int qtdDiasFolga) {
+		this.qtdDiasFolga = qtdDiasFolga;
+	}
+
+	public Integer getData() {
+		return data;
+	}
+
+	public void setData(Integer data) {
+		this.data = data;
+	}
+
 
 }
