@@ -3,27 +3,16 @@ package com.cc.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
-import com.cc.persistencia.Cliente;
 import com.cc.persistencia.VendaPorDia;
 
 public class VendaPorDiaDao implements Dao<VendaPorDia>{
 
-protected EntityManager entityManager;
-	
-	public VendaPorDiaDao() {
-		entityManager = getEntityManager();
-	}
-	
-	private EntityManager getEntityManager(){
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceUnitFabio");
-		if(entityManager == null){
-			entityManager = factory.createEntityManager();
-		}
-		return entityManager;
-	}
+  private EntityManager entityManager;
+
+  public VendaPorDiaDao(EntityManager entityManager) {
+    this.entityManager = entityManager;
+  }
 
 	public void incluir(VendaPorDia vendaPorDia) {
 		try {
@@ -36,7 +25,8 @@ protected EntityManager entityManager;
 		}
 	}
 	
-	public List<VendaPorDia> listarTodas() {
+	@SuppressWarnings("unchecked")
+  public List<VendaPorDia> listarTodas() {
 		return entityManager.createQuery("FROM " + VendaPorDia.class.getName()).getResultList();
 	}
 	

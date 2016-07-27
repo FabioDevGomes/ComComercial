@@ -16,6 +16,7 @@ protected EntityManager entityManager;
 		entityManager = getEntityManager();
 	}
 	
+	//TODO Verificar como compartilhar o EntityManager entre os DAO's
 	private EntityManager getEntityManager(){
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceUnitFabio");
 		if(entityManager == null){
@@ -35,7 +36,8 @@ protected EntityManager entityManager;
 		}
 	}
 	
-	public List<Cliente> listarTodas() {
+	@SuppressWarnings("unchecked")
+  public List<Cliente> listarTodas() {
 		return entityManager.createQuery("FROM " + Cliente.class.getName()).getResultList();
 	}
 	

@@ -6,9 +6,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import com.cc.dao.ClienteDao;
+import com.cc.dao.CriaEntityManager;
 import com.cc.dao.VendaPorDiaDao;
-import com.cc.persistencia.Cliente;
 import com.cc.persistencia.Mes;
 import com.cc.persistencia.VendaPorDia;
 
@@ -21,7 +20,8 @@ public class VendaDiaMB {
 	private VendaPorDiaDao vDao;
 	
 	public VendaDiaMB() {
-		vDao = new VendaPorDiaDao();
+	  //Proposta de DecisÃ£o de design
+		vDao = new VendaPorDiaDao(CriaEntityManager.getEntityManager());
 		mes = new Mes();
 		estadoInicial();
 	}
@@ -44,7 +44,7 @@ public class VendaDiaMB {
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"Controle de VendaPorDias:", 
-						"Cliente incluído com sucesso!"));
+						"Cliente incluï¿½do com sucesso!"));
 	}
 	
 	public void excluir(String id){
@@ -54,7 +54,7 @@ public class VendaDiaMB {
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage(FacesMessage.SEVERITY_INFO, 
 						"Controle de Clientes:", 
-						"Cliente Excluído com sucesso!"));
+						"Cliente Excluï¿½do com sucesso!"));
 	}
 
 	public VendaPorDia getVendaPorDia() {
