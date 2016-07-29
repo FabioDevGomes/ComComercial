@@ -11,7 +11,7 @@
 	<h:form id="frmCliente">
 		<p:panelGrid columns="4" style="horizontal-align:center" styleClass="panelNoBorder">
 			<h:outputText value="Mês" />
-			<p:selectOneMenu id="console" value="#{vendaPorDiaMB.mes.mes}" style="width:125px">
+			<p:selectOneMenu id="console" value="#{vendaPorDiaMB.mes.mes}" width="125px">
             	<f:selectItem itemLabel="Selecione o mês" itemValue="" />
 	            <f:selectItem itemLabel="Junho" itemValue="6" />
 	            <f:selectItem itemLabel="Julho" itemValue="7" />
@@ -28,13 +28,13 @@
 		</p:panelGrid>
 		<p:panelGrid columns="2" style="horizontal-align:center" styleClass="panelNoBorder">
 			<h:outputText value="Data referente" />
-			<p:calendar id="data" value="#{vendaPorDiaMB.vendaPorDia.data}" style="width:125px"/>
+			<p:calendar id="data" value="#{vendaPorDiaMB.vendaPorDia.data}" width="125px" />
 			<h:outputText value="Valor total vendido" />
 			<p:inputText id="valor" value="#{vendaPorDiaMB.vendaPorDia.valorVenda}" />
 		</p:panelGrid>
 		<p:panelGrid columns="2" style="horizontal-align:center" styleClass="panelNoBorder">
 			<h:outputText value="Faltam" />
-			<p:inputText id="data" value="#{vendaPorDiaMB.restanteCota}" style="width:125px" disabled="true"/>
+			<p:inputText id="data" value="#{vendaPorDiaMB.restanteCota}" width="125px" disabled="true"/>
 			<h:outputText value="Valor total vendido" />
 			<p:inputText id="valor" value="#{vendaPorDiaMB.vendaPorDia.valorVenda}" />
 		</p:panelGrid>
@@ -46,16 +46,16 @@
 		paginator="true" rows="10" emptyMessage="Não há registros na lista"
 		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 		rowsPerPageTemplate="10,15,25,50,100">
-		<p:column headerText="Mês" style="width: 10%;" sortBy="#{item.id}">
+		<p:column headerText="Mês" sortBy="#{item.id}" width="10%">
 			<h:outputText value="#{item.mes.mes}" />
 		</p:column>
-		<p:column headerText="Data" style="width: 25%;">
+		<p:column headerText="Data" width="25%">
 			<h:outputText value="#{item.dataFormatada}" />
 		</p:column>
-		<p:column headerText="Valor total da venda" style="width: 10%;" sortBy="#{item.id}">
+		<p:column headerText="Valor total da venda" width="10%" sortBy="#{item.id}">
 			<h:outputText value="#{item.valorVenda}" />
 		</p:column>
-		<p:column headerText="" style="width: 10%;">
+		<p:column headerText="" width="10%">
 			<h:commandButton action="#{vendaPorDiaMB.excluir(item.id)}" value="Excluir"
 				update="tabela" />
 		</p:column>
