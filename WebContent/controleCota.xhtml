@@ -9,16 +9,34 @@
 	<p:growl id="mensagem" showDetail="true" autoUpdate="true"
 		closable="true" />
 	<h:form id="frmCliente">
-		<p:panelGrid columns="2" style="horizontal-align:center" styleClass="panelNoBorder">
+		<p:panelGrid columns="4" style="horizontal-align:center" styleClass="panelNoBorder">
 			<h:outputText value="Mês" />
-			<p:selectOneMenu id="console" value="#{vendaPorDiaMB.mes.data}" style="width:125px">
-            <f:selectItem itemLabel="Selecione o mês" itemValue="" />
+			<p:selectOneMenu id="console" value="#{vendaPorDiaMB.mes.mes}" style="width:125px">
+            	<f:selectItem itemLabel="Selecione o mês" itemValue="" />
 	            <f:selectItem itemLabel="Junho" itemValue="6" />
 	            <f:selectItem itemLabel="Julho" itemValue="7" />
 	            <f:selectItem itemLabel="Agosto" itemValue="8" />
 	        </p:selectOneMenu>
-			<h:outputText value="Dia" />
-			<p:calendar id="data" value="#{vendaPorDiaMB.vendaPorDia.data}" />
+			<h:outputText value="Cota" />
+			<p:inputText id="cota" value="#{vendaPorDiaMB.mes.valorCota}" >
+				<f:validateDoubleRange minimum="10000" maximum="40000" />
+			</p:inputText>
+			<h:outputText value="Dias de folga no mês" />
+			<p:inputText id="dias" value="#{vendaPorDiaMB.mes.qtdDiasFolga}" >
+				<f:validateDoubleRange minimum="3" maximum="30" />
+			</p:inputText>
+		</p:panelGrid>
+		<p:panelGrid columns="2" style="horizontal-align:center" styleClass="panelNoBorder">
+			<h:outputText value="Data referente" />
+			<p:calendar id="data" value="#{vendaPorDiaMB.vendaPorDia.data}" style="width:125px"/>
+			<h:outputText value="Valor total vendido" />
+			<p:inputText id="valor" value="#{vendaPorDiaMB.vendaPorDia.valorVenda}" />
+		</p:panelGrid>
+		<p:panelGrid columns="2" style="horizontal-align:center" styleClass="panelNoBorder">
+			<h:outputText value="Faltam" />
+			<p:inputText id="data" value="#{vendaPorDiaMB.restanteCota}" style="width:125px" disabled="true"/>
+			<h:outputText value="Valor total vendido" />
+			<p:inputText id="valor" value="#{vendaPorDiaMB.vendaPorDia.valorVenda}" />
 		</p:panelGrid>
 		<p:panelGrid columns="6" styleClass="panelNoBorder">
 			<h:commandButton action="#{vendaPorDiaMB.incluir}" value="Incluir"
@@ -28,11 +46,14 @@
 		paginator="true" rows="10" emptyMessage="Não há registros na lista"
 		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 		rowsPerPageTemplate="10,15,25,50,100">
-		<p:column headerText="Nome do Cliente" style="width: 10%;" sortBy="#{item.id}">
-			<h:outputText value="#{item.valorVenda}" />
+		<p:column headerText="Mês" style="width: 10%;" sortBy="#{item.id}">
+			<h:outputText value="#{item.mes.mes}" />
 		</p:column>
-		<p:column headerText="Observações" style="width: 25%;">
-			<h:outputText value="#{item.data}" />
+		<p:column headerText="Data" style="width: 25%;">
+			<h:outputText value="#{item.dataFormatada}" />
+		</p:column>
+		<p:column headerText="Valor total da venda" style="width: 10%;" sortBy="#{item.id}">
+			<h:outputText value="#{item.valorVenda}" />
 		</p:column>
 		<p:column headerText="" style="width: 10%;">
 			<h:commandButton action="#{vendaPorDiaMB.excluir(item.id)}" value="Excluir"

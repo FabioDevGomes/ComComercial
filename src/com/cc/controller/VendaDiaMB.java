@@ -6,10 +6,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import com.cc.dao.CriaEntityManager;
 import com.cc.dao.VendaPorDiaDao;
 import com.cc.persistencia.Mes;
 import com.cc.persistencia.VendaPorDia;
+import com.cc.util.JPAUtil;
 
 @ManagedBean(name = "vendaPorDiaMB")
 public class VendaDiaMB {
@@ -18,11 +18,12 @@ public class VendaDiaMB {
 	private Mes mes;
 	private List<VendaPorDia> listaVendas;
 	private VendaPorDiaDao vDao;
+	private Double restanteCota;
 	
 	public VendaDiaMB() {
-	  //Proposta de Decisão de design
-		vDao = new VendaPorDiaDao(CriaEntityManager.getEntityManager());
-		mes = new Mes();
+		//Proposta de Decisão de design
+		vDao = new VendaPorDiaDao(JPAUtil.getEntityManager());
+		mes = vDao.mesAtual();
 		estadoInicial();
 	}
 	
@@ -30,7 +31,6 @@ public class VendaDiaMB {
 		vendaPorDia = new VendaPorDia();
 		listar();
 	}
-	
 	
 	public void listar(){
 		listaVendas = vDao.listarTodas();
@@ -56,6 +56,12 @@ public class VendaDiaMB {
 						"Controle de Clientes:", 
 						"Cliente Exclu�do com sucesso!"));
 	}
+	
+	
+	public double getRestanteCota(){
+		return vDao.totalMesAtual();
+	}
+	
 
 	public VendaPorDia getVendaPorDia() {
 		return vendaPorDia;
@@ -80,8 +86,5 @@ public class VendaDiaMB {
 	public void setMes(Mes mes) {
 		this.mes = mes;
 	}
-	
-	
-	
 
 }

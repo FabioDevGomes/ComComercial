@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.cc.util.Util;
+
 @Entity
 @Table
 public class VendaPorDia {
@@ -66,6 +68,10 @@ public class VendaPorDia {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+	
+	public String getDataFormatada(){
+		return Util.getDateToString(data);
 	}
 
 }

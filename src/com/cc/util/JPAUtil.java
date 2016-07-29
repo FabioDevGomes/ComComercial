@@ -1,10 +1,10 @@
-package com.cc.dao;
+package com.cc.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class CriaEntityManager {
+public class JPAUtil {
 
   private static EntityManager entityManager;
   

@@ -21,7 +21,7 @@ public class Mes {
 	@GeneratedValue
 	@Column(name = "mes_id")
 	private long id;
-	private Integer data;
+	private Integer mes;
 	private double valorCota;
 	private int qtdDiasFolga;
 	
@@ -61,13 +61,12 @@ public class Mes {
 		this.qtdDiasFolga = qtdDiasFolga;
 	}
 
-	public Integer getData() {
-		return data;
+	public Integer getMes() {
+		return mes;
 	}
 
-	public void setData(Integer data) {
-		this.data = data;
+	public void setMes(Integer mes) {
+		this.mes = mes;
 	}
-
 
 }
