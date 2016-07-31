@@ -34,9 +34,9 @@
 		</p:panelGrid>
 		<p:panelGrid columns="2" style="horizontal-align:center" styleClass="panelNoBorder">
 			<h:outputText value="Faltam" />
-			<p:inputText id="data" value="#{vendaPorDiaMB.restanteCota}" style="width:125px" disabled="true"/>
-			<h:outputText value="Valor total vendido" />
-			<p:inputText id="valor" value="#{vendaPorDiaMB.vendaPorDia.valorVenda}" />
+			<p:inputText id="faltam" value="#{vendaPorDiaMB.restanteCota}" style="width:125px" disabled="true"/>
+			<h:outputText value="Meta diária" />
+			<p:inputText id="media" value="#{vendaPorDiaMB.meta}" style="width:125px" disabled="true"/>
 		</p:panelGrid>
 		<p:panelGrid columns="6" styleClass="panelNoBorder">
 			<h:commandButton action="#{vendaPorDiaMB.incluir}" value="Incluir"

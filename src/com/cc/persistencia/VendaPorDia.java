@@ -1,5 +1,7 @@
 package com.cc.persistencia;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,6 +23,7 @@ public class VendaPorDia {
 	private Long id;
 	private Double valorVenda;
 	private Date data;
+	private String dataFormatada;
 	
 	@ManyToOne
 	private Mes mes;
@@ -71,7 +74,13 @@ public class VendaPorDia {
 	}
 	
 	public String getDataFormatada(){
-		return Util.getDateToString(data);
+		if(data!= null){
+			DateFormat dateTime = new SimpleDateFormat("dd/MM/aaaa");
+			String dateStr = dateTime.format(data);
+			return dateStr;
+		}
+		return "";
+
 	}
 
 }

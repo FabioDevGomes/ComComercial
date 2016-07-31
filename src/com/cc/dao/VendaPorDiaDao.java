@@ -69,8 +69,8 @@ public class VendaPorDiaDao implements Dao<VendaPorDia>{
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		int mesAtual = cal.get(Calendar.MONTH) +1;
-		Query q = entityManager.createQuery("FROM VendaPorDia v where v.mes.mes = :dia" );
-		q.setParameter("dia", mesAtual);
+		Query q = entityManager.createQuery("FROM VendaPorDia v where v.mes.mes = :mes and v.valorVenda is not null" );
+		q.setParameter("mes", mesAtual);
 		List<VendaPorDia> vendas = q.getResultList();
 		
 		if(vendas.size() > 0){
@@ -83,4 +83,5 @@ public class VendaPorDiaDao implements Dao<VendaPorDia>{
 		
 		return 0;
 	}
+	
 }

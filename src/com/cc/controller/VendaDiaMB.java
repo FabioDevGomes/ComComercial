@@ -1,5 +1,7 @@
 package com.cc.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -10,6 +12,7 @@ import com.cc.dao.VendaPorDiaDao;
 import com.cc.persistencia.Mes;
 import com.cc.persistencia.VendaPorDia;
 import com.cc.util.JPAUtil;
+import com.cc.util.Util;
 
 @ManagedBean(name = "vendaPorDiaMB")
 public class VendaDiaMB {
@@ -18,7 +21,8 @@ public class VendaDiaMB {
 	private Mes mes;
 	private List<VendaPorDia> listaVendas;
 	private VendaPorDiaDao vDao;
-	private Double restanteCota;
+	private Double media;
+	private Double meta;
 	
 	public VendaDiaMB() {
 		//Proposta de Decisão de design
@@ -53,8 +57,19 @@ public class VendaDiaMB {
 		estadoInicial();
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage(FacesMessage.SEVERITY_INFO, 
-						"Controle de Clientes:", 
-						"Cliente Exclu�do com sucesso!"));
+						"Controle de Cota:", 
+						"Excluído com sucesso!"));
+	}
+	
+	public double getMeta(){
+		java.util.Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int quantidadeDeDias = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		int totalDiaMes = quantidadeDeDias - mes.getQtdDiasFolga();
+		double meta = mes.getValorCota() / totalDiaMes;
+		
+		return meta;
 	}
 	
 	
@@ -85,6 +100,10 @@ public class VendaDiaMB {
 
 	public void setMes(Mes mes) {
 		this.mes = mes;
+	}
+
+	public Double getMedia() {
+		return media;
 	}
 
 }
