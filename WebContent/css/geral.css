@@ -2,5 +2,10 @@
 
 .panelNoBorder, .panelNoBorder tr, .panelNoBorder td{
 border: hidden;
-border-color: white;
+}
+
+.background td{
+background-color: #FFE5CC !important;
+border-color: #FFE5CC;
+font-weight: bold;
 }

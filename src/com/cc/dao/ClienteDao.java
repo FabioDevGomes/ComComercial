@@ -7,24 +7,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.cc.persistencia.Cliente;
+import com.cc.util.JPAUtil;
 
 public class ClienteDao implements Dao<Cliente>{
 
 protected EntityManager entityManager;
 	
 	public ClienteDao() {
-		entityManager = getEntityManager();
+		entityManager = JPAUtil.getEntityManager();
 	}
 	
-	//TODO Verificar como compartilhar o EntityManager entre os DAO's
-	private EntityManager getEntityManager(){
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceUnitFabio");
-		if(entityManager == null){
-			entityManager = factory.createEntityManager();
-		}
-		return entityManager;
-	}
-
 	public void incluir(Cliente cliente) {
 		try {
 			entityManager.getTransaction().begin();

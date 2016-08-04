@@ -8,8 +8,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.cc.util.Util;
 
@@ -19,13 +21,14 @@ public class VendaPorDia {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "venda_dia_id")
 	private Long id;
 	private Double valorVenda;
 	private Date data;
+	@Transient
 	private String dataFormatada;
 	
 	@ManyToOne
+	@JoinColumn(name = "mes_id", nullable = false)
 	private Mes mes;
 
 	public VendaPorDia() {

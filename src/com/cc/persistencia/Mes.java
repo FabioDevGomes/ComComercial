@@ -19,14 +19,12 @@ public class Mes {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "mes_id")
 	private long id;
 	private Integer mes;
 	private double valorCota;
 	private int qtdDiasFolga;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="mes_id")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="mes", targetEntity = VendaPorDia.class)
 	private List<VendaPorDia> vendas;
 
 	public long getId() {

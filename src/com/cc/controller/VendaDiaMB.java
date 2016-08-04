@@ -42,7 +42,7 @@ public class VendaDiaMB {
 	
 	public void incluir(){
 		VendaPorDia venda = getVendaPorDia();
-		venda.setMes(getMes());
+		venda.setMes(mes);
 		vDao.incluir(venda);
 		estadoInicial();
 		FacesContext.getCurrentInstance().addMessage(null, 
@@ -66,10 +66,13 @@ public class VendaDiaMB {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		int quantidadeDeDias = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-		int totalDiaMes = quantidadeDeDias - mes.getQtdDiasFolga();
-		double meta = mes.getValorCota() / totalDiaMes;
-		
-		return meta;
+		int totalDiasTrabalhadosMes = quantidadeDeDias - mes.getQtdDiasFolga();
+		if(mes.getVendas() != null){
+			int diasRestantes = totalDiasTrabalhadosMes - mes.getVendas().size();
+			double meta = getRestanteCota() / diasRestantes;
+			return meta;
+		}
+		return 0;
 	}
 	
 	

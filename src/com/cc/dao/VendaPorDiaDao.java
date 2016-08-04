@@ -38,8 +38,9 @@ public class VendaPorDiaDao implements Dao<VendaPorDia>{
 	public void excluir(VendaPorDia vendaPorDia) {
 		try {
 			entityManager.getTransaction().begin();
-			vendaPorDia = entityManager.find(VendaPorDia.class, vendaPorDia.getId());
-			entityManager.remove(vendaPorDia);
+			VendaPorDia venda = entityManager.find(VendaPorDia.class, vendaPorDia.getId());
+
+			entityManager.remove(venda);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,13 +49,14 @@ public class VendaPorDiaDao implements Dao<VendaPorDia>{
 		
 	}
 	
-	//Alterar após consolidação do sistema 
+	//Extrair após consolidação do sistema 
+	@SuppressWarnings("unchecked")
 	public Mes mesAtual(){
-		java.util.Date date= new Date();
+ 		java.util.Date date= new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		int mesAtual = cal.get(Calendar.MONTH) +1;
-		List<Mes> meses = entityManager.createQuery("FROM " + Mes.class.getName()).getResultList();
+		List<Mes> meses = entityManager.createQuery("select m from " + Mes.class.getName()+" m ").getResultList();
 		for (Mes mes : meses) {
 			if(mes.getMes() != null && mes.getMes() == mesAtual){
 				return mes;
