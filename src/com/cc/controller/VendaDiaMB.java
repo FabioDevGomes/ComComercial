@@ -69,7 +69,7 @@ public class VendaDiaMB {
 		int quantidadeDeDias = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		int totalDiasTrabalhadosMes = quantidadeDeDias - mes.getQtdDiasFolga();
 		if(mes.getVendas() != null){
-			int diasRestantes = totalDiasTrabalhadosMes - mes.getVendas().size();
+			int diasRestantes = totalDiasTrabalhadosMes - vDao.listarTodas().size();
 			double meta = getRestanteCota() / diasRestantes;
 			return meta;
 		}
