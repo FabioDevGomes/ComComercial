@@ -31,8 +31,15 @@ public class VendaPorDiaDao implements Dao<VendaPorDia>{
 	}
 	
 	@SuppressWarnings("unchecked")
-  public List<VendaPorDia> listarTodas() {
-		return entityManager.createQuery("FROM " + VendaPorDia.class.getName()).getResultList();
+        public List<VendaPorDia> listarTodas() {
+  	        java.util.Date date= new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int mesAtual = cal.get(Calendar.MONTH) +1;
+		Query q = entityManager.createQuery("FROM VendaPorDia v where v.mes.mes = :mes and v.valorVenda is not null" );
+		q.setParameter("mes", mesAtual);
+		
+		return q.getResultList();
 	}
 	
 	public void excluir(VendaPorDia vendaPorDia) {
@@ -65,15 +72,9 @@ public class VendaPorDiaDao implements Dao<VendaPorDia>{
 		return new Mes(); 
 	}
 	
+	//Refatorar para trazer o total direto pela query
 	public double totalMesAtual(){
-		java.util.Date date= new Date();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		int mesAtual = cal.get(Calendar.MONTH) +1;
-		Query q = entityManager.createQuery("FROM VendaPorDia v where v.mes.mes = :mes and v.valorVenda is not null" );
-		q.setParameter("mes", mesAtual);
-		List<VendaPorDia> vendas = q.getResultList();
-		
+		List<VendaPorDia> vendas = listarTodas();
 		if(vendas.size() > 0){
 			double total = 0;
 			for (VendaPorDia vendaPorDia : vendas) {
