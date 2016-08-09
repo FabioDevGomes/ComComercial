@@ -39,7 +39,6 @@ public class VendaPorDiaDao implements Dao<VendaPorDia>{
 		try {
 			entityManager.getTransaction().begin();
 			VendaPorDia venda = entityManager.find(VendaPorDia.class, vendaPorDia.getId());
-
 			entityManager.remove(venda);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
@@ -56,12 +55,12 @@ public class VendaPorDiaDao implements Dao<VendaPorDia>{
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		int mesAtual = cal.get(Calendar.MONTH) +1;
-		List<Mes> meses = entityManager.createQuery("select m from " + Mes.class.getName()+" m ").getResultList();
-		for (Mes mes : meses) {
-			if(mes.getMes() != null && mes.getMes() == mesAtual){
+		Query query = entityManager.createQuery("select m from Mes m where m.mes = :mes");
+		query.setParameter("mes", mesAtual);
+		Mes mes = (Mes) query.getSingleResult();
+			if(mes != null){
 				return mes;
 			}
-		}
 		
 		return new Mes(); 
 	}

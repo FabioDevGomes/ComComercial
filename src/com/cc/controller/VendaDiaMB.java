@@ -33,6 +33,7 @@ public class VendaDiaMB {
 	
 	private void estadoInicial(){
 		vendaPorDia = new VendaPorDia();
+		mes = vDao.mesAtual();
 		listar();
 	}
 	
@@ -52,8 +53,8 @@ public class VendaDiaMB {
 	}
 	
 	public void excluir(String id){
-		VendaPorDia cliente = new VendaPorDia(id);
-		vDao.excluir(cliente);
+		VendaPorDia diaDeVenda = new VendaPorDia(id);
+		vDao.excluir(diaDeVenda);
 		estadoInicial();
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage(FacesMessage.SEVERITY_INFO, 

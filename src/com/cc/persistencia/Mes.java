@@ -24,7 +24,7 @@ public class Mes {
 	private double valorCota;
 	private int qtdDiasFolga;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="mes", targetEntity = VendaPorDia.class)
+	@OneToMany( mappedBy="mes", targetEntity = VendaPorDia.class)
 	private List<VendaPorDia> vendas;
 
 	public long getId() {
